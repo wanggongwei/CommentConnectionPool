@@ -19,6 +19,13 @@ public:
 	static ConnectionPool* getConnectionPool();
 	//给外部提供结构从连接池中获取一个可用的空闲连接
 	std::shared_ptr<Connection> getConnection();
+	//void getInformation() {
+	//	std::cout << _ip <<
+	//		"  \n" << _port <<
+	//		"  \n" << _username <<
+	//		"  \n" << _password <<
+	//		"  \n" << _dbname << std::endl;
+	//}
 private:
 	ConnectionPool();//单例#1，构造函数私有化
 
@@ -40,5 +47,6 @@ private:
 	std::atomic_int _curConnectionSize;	//用来记录所创建的connection的总数量
 	std::condition_variable _connQueue_not_empty;//设置条件变量用于连接生产线程和连接消费线程的通信
 
+	void checkIdleTimeLink();
 
 };

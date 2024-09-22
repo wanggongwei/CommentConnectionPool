@@ -25,7 +25,8 @@ bool Connection::update(std::string sql)
 	//更新操作
 	if (mysql_query(_conn, sql.c_str()))
 	{
-		LOG("更新失败： " + sql);
+		std::cerr << "Update failed: " << sql << std::endl;
+		std::cerr << "Error: " << mysql_error(_conn) << std::endl;
 		return false;
 	}
 	return true;
